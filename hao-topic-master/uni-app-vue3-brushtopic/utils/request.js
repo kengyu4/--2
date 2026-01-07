@@ -1,0 +1,100 @@
+// 进行axios二次封装:使用请求与响应拦截器
+import axios from 'axios'
+import { clearStorage } from '@/utils/auth'
+
+//第一步:利用axios对象的create方法,去创建axios实例(其他的配置:基础路径、超时的时间)
+const request = axios.create({
+  //基础路径
+  baseURL: "http://localhost:9992/api", //基础路径上会携带/api
+  timeout: 100000, //超时的时间的设置
+})
+
+// 创建一个不需要 token 的请求实例（用于注册、发送验证码等公开接口）
+export const publicRequest = axios.create({
+  baseURL: "http://localhost:9992/api",
+  timeout: 100000,
+})
+
+// 公开请求的响应拦截器
+publicRequest.interceptors.response.use(
+  (response) => {
+    return response.data
+  },
+  (error) => {
+    console.log("publicRequest error:", error);
+    // 提示错误信息
+    uni.showToast({
+      title: error.response?.data?.message || '请求错误',
+      icon: 'error',
+      duration: 2000
+    });
+    return Promise.reject(error)
+  }
+)
+
+//第二步:request实例添加请求与响应拦截器
+request.interceptors.request.use((config) => {
+  // 获取token
+  const userInfo = uni.getStorageSync('h5UserInfo')
+  if (userInfo) {
+    try {
+      const json = JSON.parse(userInfo)
+      const token = uni.getStorageSync(json.account + 'token')
+      if (token) {
+        config.headers.Authorization = token
+        console.log('请求携带Token - Account:', json.account, 'Token:', token.substring(0, 20) + '...')
+      } else {
+        console.warn('未找到Token - Account:', json.account)
+      }
+    } catch (error) {
+      console.error('解析用户信息失败:', error)
+    }
+  } else {
+    console.warn('未找到用户信息')
+  }
+  // 返回配置对象
+  return config
+})
+
+//第三步:响应拦截器
+request.interceptors.response.use(
+  (response) => {
+    // 成功回调
+    return response.data
+  },
+  (error) => {
+    console.log("error1", error);
+
+    console.log(error);
+
+    const status = error.response.status
+
+    if (status === 401) {
+      // token过期
+      // 跳转到登录页面
+      uni.showToast({
+        title: '登录过期 请重新登录',
+        icon: 'error',
+        duration: 2000
+      });
+      clearStorage()
+      // 跳转
+      setTimeout(() => {
+        uni.reLaunch({
+          url: '/pages/login/login',
+        })
+      }, 1500)
+      return
+    }
+
+    // 提示错误信息
+    uni.showToast({
+      title: error.response.data.message || '请求错误',
+      icon: 'error',
+      duration: 2000
+    });
+    return Promise.reject(error)
+  },
+)
+//对外暴露
+export default request

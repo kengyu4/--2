@@ -1,0 +1,10 @@
+com\hao\topic\api\utils\utils\ExcelUtil.class
+com\hao\topic\api\utils\properties\MinIOConfigProperties.class
+com\hao\topic\api\utils\constant\RabbitConstant.class
+com\hao\topic\api\utils\mq\MQProducerAckConfig.class
+com\hao\topic\api\utils\mq\RabbitService.class
+com\hao\topic\api\utils\enums\StatusEnums.class
+com\hao\topic\api\utils\minio\MinioConfig.class
+com\hao\topic\api\utils\constant\TimeUtils.class
+com\hao\topic\api\utils\helper\MinioHelper.class
+com\hao\topic\api\utils\config\MybatisPlusConfig.class

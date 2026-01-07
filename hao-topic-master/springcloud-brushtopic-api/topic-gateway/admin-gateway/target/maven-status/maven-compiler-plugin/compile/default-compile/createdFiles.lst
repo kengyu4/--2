@@ -1,0 +1,5 @@
+com\hao\topic\admin\gateway\config\CorsConfig.class
+com\hao\topic\admin\gateway\AdminGatewayApplication.class
+com\hao\topic\admin\gateway\handler\GatewayExceptionHandler.class
+com\hao\topic\admin\gateway\properties\IgnoreWhiteProperties.class
+com\hao\topic\admin\gateway\filter\AuthorizeFilter.class

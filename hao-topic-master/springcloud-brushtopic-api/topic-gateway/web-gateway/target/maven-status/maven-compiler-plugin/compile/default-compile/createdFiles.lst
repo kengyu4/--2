@@ -1,0 +1,5 @@
+com\hao\topic\web\gateway\properties\IgnoreWhiteProperties.class
+com\hao\topic\web\gateway\config\CorsConfig.class
+com\hao\topic\web\gateway\filter\AuthorizeFilter.class
+com\hao\topic\web\gateway\handler\GatewayExceptionHandler.class
+com\hao\topic\web\gateway\WebGatewayApplication.class
