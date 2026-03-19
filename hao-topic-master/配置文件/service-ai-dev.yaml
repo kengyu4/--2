@@ -1,13 +1,24 @@
 server:
   port: 9995
 spring:
+  # 选择 AI 提供商: openai（默认，使用阿里云百炼/Qwen等兼容接口）或 anthropic（Claude Sonnet）
+  # GitHub Copilot 教育福利用户可将 provider 改为 anthropic 并填入 Anthropic API Key 使用 Claude Sonnet
   ai:
+    provider: openai
     openai:
       base-url: https://dashscope.aliyuncs.com/compatible-mode   
       api-key: ******
       chat: 
         options:
           model: qwen-max-2025-01-25
+          temperature: 0.8
+    # Claude Sonnet 配置（GitHub Copilot 教育福利 / Anthropic API）
+    # 启用方式: 将上方 spring.ai.provider 改为 anthropic，并填入 api-key
+    anthropic:
+      api-key: ******
+      chat:
+        options:
+          model: claude-sonnet-4-5
           temperature: 0.8
 
 # 语音合成

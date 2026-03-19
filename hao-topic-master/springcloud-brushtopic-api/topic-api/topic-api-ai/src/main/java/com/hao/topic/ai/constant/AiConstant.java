@@ -15,4 +15,12 @@ public class AiConstant {
     // 混合模式'AI随机混合系统题库和AI自定义题目增加多样性'
     public final static String MIX_MODEL = "mix";
     public static final String DAY_HISTORY = "当天";
+
+    // AI 提供商标识
+    // OpenAI 兼容接口（默认，如阿里云百炼 Qwen）
+    public final static String PROVIDER_OPENAI = "openai";
+    // Anthropic Claude Sonnet（支持 GitHub Copilot 教育福利账号）
+    public final static String PROVIDER_ANTHROPIC = "anthropic";
+    // Claude Sonnet 模型名称
+    public final static String CLAUDE_SONNET_MODEL = "claude-sonnet-4-5";
 }

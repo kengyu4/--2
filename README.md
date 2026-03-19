@@ -18,6 +18,7 @@
 - 使用**SpringTask**实现每日刷题题目动态推荐用户专属题目提高用户留存率
 - 使用**阿里云百炼TTS**语音合成技术朗读面试题内容提升用户刷题兴趣
 - 使用**SpringAi**接入阿里云百炼api接口进行对话有免费额度
+- 支持**Claude Sonnet**模型（通过GitHub Copilot教育福利或Anthropic API Key接入）
 - 使用**Echarts**仿力扣分类气泡图展示题目分类和数量有创意
 - 使用**Echarts**仿gitee日历热点图展示用户每日刷题次数提高用户刷题率
 - 使用**Security**严格控制角色权限保障会员权益
@@ -103,6 +104,25 @@ npm run dev
 - 打开service-ai配置文件配置自己的阿里云百炼sk
 - 安装完minio后需要创建topic桶并开放public权限
 - 将sql文件夹中的sql放入到你的数据库中启动！
+
+#### AI 模型切换（Claude Sonnet）
+
+本项目支持通过 **GitHub Copilot 教育福利** 或 **Anthropic API Key** 使用 Claude Sonnet 模型。
+
+在 `service-ai-dev.yaml` 中修改以下配置：
+
+```yaml
+spring:
+  ai:
+    provider: anthropic   # 切换为 anthropic 启用 Claude Sonnet（默认 openai）
+    anthropic:
+      api-key: 你的Anthropic-API-Key
+      chat:
+        options:
+          model: claude-sonnet-4-5
+```
+
+> **GitHub Copilot 教育福利用户**：可通过 Copilot 提供的 Anthropic API Key 使用 Claude Sonnet 模型，无需额外付费。
 
 ### Docker 部署 🐳
 
