@@ -12,7 +12,7 @@ spring:
 
 # 语音合成
 tts:
-  api-key: sk-810a5110697a40028d077dc3ad9e4f80
+  api-key: ******
   model: cosyvoice-v1
   voice: longcheng
 # 本地模型配置
